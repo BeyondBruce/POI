@@ -1,0 +1,33 @@
+public static void writeexcel(List<Object[]> list, File file) {
+        // 1.声明工作簿
+        HSSFWorkbook excel = new HSSFWorkbook();
+        // 2.创建工作表
+        sheet = excel.createSheet("客户信息");
+        // 3.为工作表添加行
+        HSSFRow firstRow = sheet.createRow(0);
+        // 4.添加单元格
+        HSSFCell cells[] = new HSSFCell[3];
+
+        insertCell(list);
+
+        OutputStream out = null;
+
+        try {
+
+            out = new FileOutputStream(file);
+
+            excel.write(out);
+
+            out.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
