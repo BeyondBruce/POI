@@ -1,0 +1,21 @@
+public static void saveFile(List<Map<String, Object>> list) {
+        File file = null;
+        JFileChooser jFileChooser = new JFileChooser();// 文件选择器
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.xls","xls");// 文件名过滤器
+        jFileChooser.setFileFilter(filter);// 给文件选择器加入文件过滤器
+        File newfile = new File("新建文件.xls");
+        jFileChooser.setSelectedFile(newfile);
+        if (JFileChooser.APPROVE_OPTION == jFileChooser
+                .showSaveDialog(jFileChooser)) {
+            file = jFileChooser.getSelectedFile();
+
+            if(file.exists()){
+                int n = JOptionPane.showConfirmDialog(null,"文件已存在，是否覆盖", "提示", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                if (JOptionPane.YES_OPTION == n) {
+                    writeexcel(list, file);
+                }
+            }else {
+                writeexcel(list, file);
+            }
+
+        }
